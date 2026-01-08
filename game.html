@@ -1,30 +1,49 @@
 <html>
 <head>
-<title> legally distinct space game</title>
+<title> legally distinct space game </title>
 <script src="https://simplycodingcourses.com/files/simply.js"></script>
 <script>
 function start(){
 sjs.open("target",800,500);
 
-// background stuff
 
-setTimeout(function(){
+ // stars
+  setInterval(function(){
 
     var star = new sjs.Image("Images/star.png");
     star.setSize(5,5);
+    star.friction = 0;
+    star.type = "star";
+    star.noBounds = true;
 
-    function randomOffset(minimum, maximum){
-      return Math.floor(Math.random() * (maximum - minimum) + minimum);
-    }
+    var starOffsetX = Math.round(Math.random()*800);
+    var starOffsetY = Math.round(Math.random()*50);
 
-    star.offset(0, randomOffset(50,100));
+    star.offset(starOffsetX, starOffsetY);
 
     star.pushDown(3);
-}, 2000 );
 
-}
+}, 350 );
+
+sjs.onHit("star", "bottom_screen", function(x,y){
+  x.destroy();
+});
+
+// player
+
+  var player = new sjs.Image("Images/ship_placeholder.png");
+  player.setSize(75,75);
+  player.friction = 0;
+  player.type = player;
+  player.centerH();
+  player.bottom();
+
+} //end start
 </script>
-<div id="target" style="margin:auto;background:black;"></div>
-<div id="output" style="margin:0 50 0 50;"></div>
+</head>
+<body onload="start()">
+<h1> legally distinct space game </h1>
+
+<div id="target" style="margin:auto;background:rgb(0, 0, 0);"></div>
 </body>
 </html>
