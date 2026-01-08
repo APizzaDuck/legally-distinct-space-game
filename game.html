@@ -23,7 +23,7 @@ sjs.open("target",800,500);
 
     star.pushDown(3);
 
-}, 350 );
+}, 250 );
 
 sjs.onHit("star", "bottom_screen", function(x,y){
   x.destroy();
@@ -33,10 +33,38 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
   var player = new sjs.Image("Images/ship_placeholder.png");
   player.setSize(75,75);
-  player.friction = 0;
-  player.type = player;
+  player.friction = .30;
+  player.type = "player";
   player.centerH();
   player.bottom();
+
+  sjs.keyDown(W_KEY, function(){
+
+    player.pushUp(3);
+
+  });
+
+  sjs.keyDown(S_KEY, function(){
+
+    player.pushDown(3);
+
+  });
+
+  sjs.keyDown(A_KEY ,function(){
+
+    player.pushLeft(3);
+
+  });
+
+  sjs.keyDown(D_KEY, function(){
+
+    player.pushRight(3);
+
+  });
+
+ 
+
+
 
 } //end start
 </script>
