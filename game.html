@@ -6,7 +6,7 @@
 function start(){
 sjs.open("target",800,500);
 
-
+// note to self: gemini is not to be trusted with coding. aint no clanker that can make my spaghetti code.
  // stars
   setInterval(function(){
 
@@ -22,7 +22,6 @@ sjs.open("target",800,500);
     star.offset(starOffsetX, starOffsetY);
 
     star.pushDown(3);
-
 }, 250 );
 
 sjs.onHit("star", "bottom_screen", function(x,y){
@@ -37,6 +36,8 @@ sjs.onHit("star", "bottom_screen", function(x,y){
   player.type = "player";
   player.centerH();
   player.bottom();
+
+  var hitPoints = 3;
 
   sjs.keyDown(W_KEY, function(){
 
@@ -62,7 +63,41 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
   });
 
+
+  // enemies
+
+   setInterval(function(){
+
+    var enemy = new sjs.Image("Images/enemy_placeholder.png");
+    enemy.friction = 0;
+    enemy.type = "enemy";
+    enemy.setSize(75, 75);
+    enemy.noBounds = true;
+
+    var enemyOffsetX = Math.round(Math.random()*800);
+    var enemyOffsetY = Math.round(Math.random()*50);
+
+
+    enemy.offset(enemyOffsetX, enemyOffsetY);
+
+
+    enemy.pushDown(3);
+    
+   
+  
+
+
+
+
+}, 1000 );
+
  
+    sjs.onHit("player", "enemy" ,function (x,y){
+
+      hp = (hp - 1);
+
+
+    });
 
 
 
