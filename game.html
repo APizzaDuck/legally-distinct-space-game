@@ -37,7 +37,7 @@ sjs.onHit("star", "bottom_screen", function(x,y){
   player.centerH();
   player.bottom();
 
-  var hitPoints = 3;
+  var hitPoints = 5;
 
   sjs.keyDown(W_KEY, function(){
 
@@ -93,8 +93,16 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
  
     sjs.onHit("player", "enemy" ,function (x,y){
+      setInterval(function(){
+         hitPoints = (hitPoints- 1);
 
-      hp = (hp - 1);
+      }, 1000 );
+     
+
+      if (hitPoints <= 0){
+        x.destroy
+        window.open('gameover.html');
+      }
 
 
     });
