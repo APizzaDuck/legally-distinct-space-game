@@ -6,7 +6,15 @@
 function start(){
 sjs.open("target",800,500);
 
-// note to self: gemini is not to be trusted with coding. aint no clanker that can make my spaghetti code.
+
+// text COPILOT I SAID FUCK OFF YOU PIECE OF SHIT CLANKER
+
+var hpText = new sjs.Text("HP: 5", 20, "red");
+hpText.right();
+var scoreText = new sjs.Text("Score: 0", 20, "white");
+scoreText.right();
+scoreText.offset(0, 75);
+// note to self: gemini is not to be trusted with coding. aint no clanker that can make my spaghetti code. i am one in a krillion.
  // stars
   setInterval(function(){
 
@@ -27,17 +35,15 @@ sjs.open("target",800,500);
 sjs.onHit("star", "bottom_screen", function(x,y){
   x.destroy();
 });
-
+var score = 0;
 // player
 
-  var player = new sjs.Image("Images/ship_placeholder.png");
+  var player = new sjs.Image("Images/ship.gif.gif");
   player.setSize(75,75);
   player.friction = .30;
   player.type = "player";
   player.centerH();
   player.bottom();
-
-  var hitPoints = 5;
 
   sjs.keyDown(W_KEY, function(){
 
@@ -63,12 +69,32 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
   });
 
+  // laser
+  canShoot = true;
+
+  sjs.keyDown(SPACE_KEY, function(){
+
+    if (canShoot == true) {
+      var laser = new sjs.Image("Images/laser.png.png");
+      laser.setSize(60, 60);
+      laser.friction = 0
+      laser.type = "laser";
+      laser.moveTo(player.getX(), player.getY());
+      laser.pushUp(6);
+      canShoot = false;
+    } else {
+      setTimeout(function(){
+        canShoot = true;
+      }, 500);
+    }
+  });
+    
 
   // enemies
 
    setInterval(function(){
 
-    var enemy = new sjs.Image("Images/enemy_placeholder.png");
+    var enemy = new sjs.Image("Images/enemy.gif.gif");
     enemy.friction = 0;
     enemy.type = "enemy";
     enemy.setSize(75, 75);
@@ -83,7 +109,6 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
     enemy.pushDown(3);
     
-   
   
 
 
@@ -91,23 +116,40 @@ sjs.onHit("star", "bottom_screen", function(x,y){
 
 }, 1000 );
 
+
+var hitPoints = 5;
+
+
+  // FUCK OFF COPILOT (aka honhits)
  
     sjs.onHit("player", "enemy" ,function (x,y){
-      setInterval(function(){
-         hitPoints = (hitPoints- 1);
-
-      }, 1000 );
-     
-
-      if (hitPoints <= 0){
-        x.destroy
-        window.open('gameover.html');
+      y.destroy();
+      hitPoints = hitPoints - 1;
+      hpText.setText("HP: "+hitPoints);
+      if (hitPoints <= 0) {
+        window.location = 'gameover.html';
       }
-
-
     });
 
+    sjs.onHit("enemy", "bottom_screen", function(x,y){
+      x.destroy();
+      hitPoints = hitPoints - 1;
+      hpText.setText("HP: "+hitPoints);
+      if (hitPoints <= 0) {
+        window.location = 'gameover.html';
+      }
+    });
 
+    sjs.onHit("enemy", "laser", function(x,y){
+      x.destroy();
+      y.destroy();
+      score = score + 1;
+      scoreText.setText("Score: "+score);
+    });
+
+    sjs.onHit("laser", "top_screen", function(x,y){
+      x.destroy();
+    });
 
 } //end start
 </script>

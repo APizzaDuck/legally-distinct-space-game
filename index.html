@@ -6,15 +6,15 @@
 function start(){
 sjs.open("target",800,500);
 
-     var skillIssue = new sjs.Text("You Died :(", 42, "red");
-    skillIssue.center();
-    skillIssue.offset(0, -50);
+    var title = new sjs.Text("Legally Distinct Space Game!", 42, "white");
+    title.centerH();
+    title.offset(0, 75);
 
-
-    var tryAgain = new sjs.Button("Try Again?", function(){
+    var startBtn = new sjs.Button("Play!", function(){
         window.location = 'game.html';
     });
-tryAgain.center();
+    startBtn.center();
+
 
 } //end start
 </script>
